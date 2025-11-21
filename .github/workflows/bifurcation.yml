@@ -16,12 +16,14 @@ jobs:
           echo "You've reached a fork in the road"
 
   path_1:
+    needs: ["take_path"]
     name: Path 1
     uses: ./.github/workflows/_given.yml
     with:
       path_name: path-1
 
   path_2:
+    needs: ["take_path"]
     name: Path 2
     uses: ./.github/workflows/_given.yml
     with:
