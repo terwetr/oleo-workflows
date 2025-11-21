@@ -14,13 +14,9 @@ on:
 
 jobs:
   path_approval:
-    environment: ${{ matrix.approval_env }}
+    environment: ${{ path_name }}
     name: Path Approval
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        approval_env:
-          ["dev-${{ inputs.path_name }}", "prod-${{ inputs.path_name }}"]
     steps:
       - name: Awaiting approval
         run: echo "This job exists only to trigger environment approval."
