@@ -29,17 +29,15 @@ jobs:
       matrix:
         env: ["dev", "prod"]
     outputs:
-      dev_VAR_1: ${{ steps.set.outputs.VAR_1 }}
-      dev_VAR_2: ${{ steps.set.outputs.VAR_2 }}
-      prod_VAR_1: ${{ steps.set.outputs.VAR_1 }}
-      prod_VAR_2: ${{ steps.set.outputs.VAR_2 }}
+      dev_VAR_1: ${{ steps.set.outputs.dev_VAR_1 }}
+      dev_VAR_2: ${{ steps.set.outputs.dev_VAR_2 }}
+      prod_VAR_1: ${{ steps.set.outputs.prod_VAR_1 }}
+      prod_VAR_2: ${{ steps.set.outputs.prod_VAR_2 }}
     steps:
       - id: set
         run: |
-          echo "dev_VAR_1=${{ vars.VAR_1 }}" >> $GITHUB_OUTPUT
-          echo "dev_VAR_2=${{ vars.VAR_2 }}" >> $GITHUB_OUTPUT
-          echo "prod_VAR_1=${{ vars.VAR_1 }}" >> $GITHUB_OUTPUT
-          echo "prod_VAR_2=${{ vars.VAR_2 }}" >> $GITHUB_OUTPUT
+          echo "${{ matrix.env }}_VAR_1=${{ vars.VAR_1 }}" >> $GITHUB_OUTPUT
+          echo "${{ matrix.env }}_VAR_2=${{ vars.VAR_2 }}" >> $GITHUB_OUTPUT
 
   declare_item_given:
     # needs: ["path_approval"]
