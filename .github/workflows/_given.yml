@@ -23,7 +23,7 @@ jobs:
 
   declare_item_given:
     # needs: ["path_approval"]
-    environment: ${{ matrix.env }}
+    environment: ${{ matrix.env }}-${{ inputs.path_name }}
     name: Environment
     runs-on: ubuntu-latest
     strategy:
@@ -36,4 +36,4 @@ jobs:
 
       - name: Declare
         run: |
-          echo "You were given an ${{ inputs.item }} in ${{ matrix.env }}"
+          echo "You were given an ${{ inputs.item }} in ${{ matrix.env }}-${{ inputs.path_name }}"
