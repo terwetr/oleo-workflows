@@ -37,4 +37,4 @@ jobs:
       - name: Declare
         run: |
           echo "You were given an ${{ inputs.item }} in ${{ matrix.env }} for ${{ inputs.path_name }}"
-          echo "But you already had: ${{ variables.VAR_1 }}, ${{ variables.VAR_2 }}"
+          echo "But you already had: ${{ vars.VAR_1 }}, ${{ vars.VAR_2 }}"
