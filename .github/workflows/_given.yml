@@ -20,6 +20,9 @@ jobs:
     strategy:
       matrix:
         env: ["dev-${{ inputs.path_name }}", "prod-${{ inputs.path_name }}"]
+    steps:
+      - name: Awaiting approval
+        run: echo "This job exists only to trigger environment approval."
 
   declare_item_given:
     needs: ["path_approval"]
