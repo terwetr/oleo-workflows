@@ -51,8 +51,8 @@ jobs:
       matrix:
         env: ["dev", "prod"]
     env:
-      VAR_1: ${{ needs.set_variables.outputs.VAR_1 }}
-      VAR_2: ${{ needs.set_variables.outputs.VAR_2 }}
+      VAR_1: ${{ needs.set_variables.outputs[format("{0}_VAR_1", matrix.env)] }}
+      VAR_2: ${{ needs.set_variables.outputs[format("{0}_VAR_2", matrix.env)] }}
 
     steps:
       - name: Checkout Code
