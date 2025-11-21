@@ -1,0 +1,27 @@
+name: Deploy to Dev with Separate Approvals
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job-a:
+    runs-on: ubuntu-latest
+    environment: dev # Link Job A to the 'dev' environment
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run Job A tasks
+        run: |
+          echo "Running tasks for Job A in dev environment"
+          # Add your specific commands for Job A here
+
+  job-b:
+    runs-on: ubuntu-latest
+    environment: dev # Link Job B to the 'dev' environment
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run Job B tasks
+        run: |
+          echo "Running tasks for Job B in dev environment"
+          # Add your specific commands for Job B here
