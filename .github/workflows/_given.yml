@@ -7,15 +7,16 @@ on:
         default: "egg"
         required: false
         type: string
+      env:
+        description: "Environment in play"
+        required: true
+        type: string
 
 jobs:
   declare_item_given:
-    environment: ${{ matrix.env }}
+    environment: ${{ inputs.env }}
     name: Environment
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        env: ["dev", "prod"]
 
     steps:
       - name: Checkout Code
@@ -23,4 +24,4 @@ jobs:
 
       - name: Declare
         run: |
-          echo "You were given an ${{ inputs.item }} in ${{ matrix.env }}"
+          echo "You were given an ${{ inputs.item }} in ${{ inputs.env }}"

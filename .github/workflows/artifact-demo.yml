@@ -1,6 +1,5 @@
 name: Create Artifact Demo
 on:
-  - push
   - workflow_dispatch
 env:
   ARTIFACT_NAME: "demo-artifact.txt"
