@@ -9,7 +9,8 @@ on:
         type: string
 
 jobs:
-  declare:
+  declare_item_given:
+    environment: ${{ matrix.env }}
     name: Environment
     runs-on: ubuntu-latest
     strategy:
