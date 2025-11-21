@@ -1,0 +1,23 @@
+name: Given
+on:
+  workflow_call:
+    inputs:
+      item:
+        description: 'An item that starts with a vowel'
+        default: 'egg'
+        required: false
+        type: string
+
+jobs:
+  declare:
+    name: Environment
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: ['dev', 'prod']
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Declare
+        run: |
+          echo "You were given an ${{ inputs.item }} in ${{ matrix.env }}" 
