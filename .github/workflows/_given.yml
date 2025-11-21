@@ -14,7 +14,7 @@ on:
 
 jobs:
   path_approval:
-    environment: ${{ path_name }}
+    environment: ${{ inputs.path_name }}
     name: Path Approval
     runs-on: ubuntu-latest
     steps:
