@@ -7,16 +7,28 @@ on:
         default: "egg"
         required: false
         type: string
-      env:
-        description: "Environment in play"
+      path_name:
+        description: "Path identifier"
         required: true
         type: string
 
 jobs:
+  path_approval:
+    environment: ${{ matrix.env }}-${{ inputs.path_name }}
+    name: Path Approval
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: ["dev-${{ inputs.path_name }}", "prod-${{ inputs.path_name }}"]
+
   declare_item_given:
-    environment: ${{ inputs.env }}
+    needs: ["path_approval"]
+    environment: ${{ matrix.env }}
     name: Environment
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: ["dev", "prod"]
 
     steps:
       - name: Checkout Code
@@ -24,4 +36,4 @@ jobs:
 
       - name: Declare
         run: |
-          echo "You were given an ${{ inputs.item }} in ${{ inputs.env }}"
+          echo "You were given an ${{ inputs.item }} in ${{ matrix.env }}"

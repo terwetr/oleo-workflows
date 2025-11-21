@@ -16,22 +16,14 @@ jobs:
           echo "You've reached a fork in the road"
 
   path_1:
-    needs: ["take_path"]
     name: Path 1
-    strategy:
-      matrix:
-        env: ["dev", "prod"]
     uses: ./.github/workflows/_given.yml
     with:
-      env: ${{ matrix.env }}
+      path_name: path-1
 
   path_2:
-    needs: ["take_path"]
     name: Path 2
-    strategy:
-      matrix:
-        env: ["dev", "prod"]
     uses: ./.github/workflows/_given.yml
     with:
-      env: ${{ matrix.env }}
+      path_name: path-2
       item: Alligator
