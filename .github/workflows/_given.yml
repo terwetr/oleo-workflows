@@ -3,8 +3,8 @@ on:
   workflow_call:
     inputs:
       item:
-        description: 'An item that starts with a vowel'
-        default: 'egg'
+        description: "An item that starts with a vowel"
+        default: "egg"
         required: false
         type: string
 
@@ -14,10 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        env: ['dev', 'prod']
+        env: ["dev", "prod"]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Declare
         run: |
-          echo "You were given an ${{ inputs.item }} in ${{ matrix.env }}" 
+          echo "You were given an ${{ inputs.item }} in ${{ matrix.env }}"

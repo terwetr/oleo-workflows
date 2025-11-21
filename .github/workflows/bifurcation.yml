@@ -8,17 +8,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Warn
-      run: |
-        echo "You've reached a fork in the road"
-        
-    - name: Path 1
-      uses: ./.github/workflows/_given.yml
-      
-    - name: Path 2
-      uses: ./.github/workflows/_given.yml
-      with:
-        item: Alligator
-    
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Warn
+        run: |
+          echo "You've reached a fork in the road"
+
+  path_1:
+    name: Path 1
+    uses: ./.github/workflows/_given.yml
+
+  path_2:
+    name: Path 2
+    uses: ./.github/workflows/_given.yml
+    with:
+      item: Alligator
