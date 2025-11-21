@@ -13,16 +13,16 @@ on:
         type: string
 
 jobs:
-  path_approval:
-    environment: ${{ inputs.path_name }}
-    name: Path Approval
-    runs-on: ubuntu-latest
-    steps:
-      - name: Awaiting approval
-        run: echo "This job exists only to trigger environment approval."
+  # path_approval:
+  #   environment: ${{ inputs.path_name }}
+  #   name: Path Approval
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Awaiting approval
+  #       run: echo "This job exists only to trigger environment approval."
 
   declare_item_given:
-    needs: ["path_approval"]
+    # needs: ["path_approval"]
     environment: ${{ matrix.env }}
     name: Environment
     runs-on: ubuntu-latest

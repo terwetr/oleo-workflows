@@ -15,13 +15,31 @@ jobs:
         run: |
           echo "You've reached a fork in the road"
 
+  path_1_approval:
+    environment: path-1
+    name: Path Approval
+    runs-on: ubuntu-latest
+    steps:
+      - name: Awaiting approval
+        run: echo "This job exists only to trigger environment approval."
+
   path_1:
+    needs: ["path_1_approval"]
     name: Path 1
     uses: ./.github/workflows/_given.yml
     with:
       path_name: path-1
 
+  path_2_approval:
+    environment: path-2
+    name: Path Approval
+    runs-on: ubuntu-latest
+    steps:
+      - name: Awaiting approval
+        run: echo "This job exists only to trigger environment approval."
+
   path_2:
+    needs: ["path_2_approval"]
     name: Path 2
     uses: ./.github/workflows/_given.yml
     with:
