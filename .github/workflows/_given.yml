@@ -21,6 +21,19 @@ jobs:
   #     - name: Awaiting approval
   #       run: echo "This job exists only to trigger environment approval."
 
+  set_variables:
+    environment: ${{ matrix.env }}
+    name: Environment
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: ["dev", "prod"]
+
+    steps:
+      - run: |
+          echo "${{ matrix.env }}_${{ inputs.path_name }}_VAR_1=${{ vars.VAR_1 }}" >> $GITHUB_OUTPUT
+          echo "${{ matrix.env }}_${{ inputs.path_name }}_VAR_2=${{ vars.VAR_2 }}" >> $GITHUB_OUTPUT
+
   declare_item_given:
     # needs: ["path_approval"]
     environment: ${{ matrix.env }}-${{ inputs.path_name }}
@@ -29,6 +42,9 @@ jobs:
     strategy:
       matrix:
         env: ["dev", "prod"]
+    env:
+      VAR_1: ${{ vars[format('{0}_{1}_VAR_1', matrix.env, inputs.path_name)] }}
+      VAR_2: ${{ vars[format('{0}_{1}_VAR_2', matrix.env, inputs.path_name)] }}
 
     steps:
       - name: Checkout Code
@@ -37,4 +53,4 @@ jobs:
       - name: Declare
         run: |
           echo "You were given an ${{ inputs.item }} in ${{ matrix.env }} for ${{ inputs.path_name }}"
-          echo "But you already had: ${{ vars.VAR_1 }}, ${{ vars.VAR_2 }}"
+          echo "But you already had: ${VAR_1}, ${VAR_2}"
