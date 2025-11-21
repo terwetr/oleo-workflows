@@ -23,16 +23,19 @@ jobs:
 
   set_variables:
     environment: ${{ matrix.env }}
-    name: Environment
+    name: Set Output Variables
     runs-on: ubuntu-latest
     strategy:
       matrix:
         env: ["dev", "prod"]
-
+    outputs:
+      VAR_1: ${{ steps.set.outputs.VAR_1 }}
+      VAR_2: ${{ steps.set.outputs.VAR_1 }}
     steps:
-      - run: |
-          echo "${{ matrix.env }}_${{ inputs.path_name }}_VAR_1=${{ vars.VAR_1 }}" >> $GITHUB_OUTPUT
-          echo "${{ matrix.env }}_${{ inputs.path_name }}_VAR_2=${{ vars.VAR_2 }}" >> $GITHUB_OUTPUT
+      - id: set
+        run: |
+          echo "VAR_1=${{ vars.VAR_1 }}" >> $GITHUB_OUTPUT
+          echo "VAR_2=${{ vars.VAR_2 }}" >> $GITHUB_OUTPUT
 
   declare_item_given:
     # needs: ["path_approval"]
@@ -44,8 +47,8 @@ jobs:
       matrix:
         env: ["dev", "prod"]
     env:
-      VAR_1: ${{ needs.set_variables.outputs[format('{0}_{1}_VAR_1', matrix.env, inputs.path_name)] }}
-      VAR_2: ${{ needs.set_variables.outputs[format('{0}_{1}_VAR_2', matrix.env, inputs.path_name)] }}
+      VAR_1: ${{ needs.set_variables.outputs.VAR_1 }}
+      VAR_2: ${{ needs.set_variables.outputs.VAR_2 }}
 
     steps:
       - name: Checkout Code
